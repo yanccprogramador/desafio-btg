@@ -54,6 +54,7 @@
             ></v-text-field>
             <v-text-field
               v-model="weapon.mod"
+              type="number"
               label="Weapon mod"
             ></v-text-field>
             <v-select
@@ -67,6 +68,7 @@
             v-for="(attribute, key) in attributes"
             :key="key"
             v-model="knight.attributes[attribute.toLowerCase()]"
+             type="number"
             :label="attribute"
           ></v-text-field>
 

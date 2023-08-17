@@ -26,25 +26,29 @@ export default createStore({
   actions: {
     async init({ commit }) {
       commit("setLoading", true);
-      const heroPromise = knightService
-        .getHeroes()
-        .then((heroes) => commit("setHeroes", heroes));
-      const KnightPromise = knightService
-        .getKnights()
-        .then((knights) => commit("setKnights", knights));
-      await Promise.all([heroPromise, KnightPromise]);
+      try {
+        const heroPromise = knightService
+          .getHeroes()
+          .then((heroes) => commit("setHeroes", heroes));
+        const KnightPromise = knightService
+          .getKnights()
+          .then((knights) => commit("setKnights", knights));
+
+        await Promise.all([heroPromise, KnightPromise]);
+      } catch (err: any) {
+        console.log(err);
+        alert("Erro inesperado");
+      }
       commit("setLoading", false);
     },
     async createKnight({ commit, dispatch }, body) {
       commit("setLoading", true);
       try {
         await knightService.createKnight(body);
-        dispatch('init');
+        dispatch("init");
       } catch (err: any) {
-        if (err.code == 422) {
-          console.log(err);
-          alert("Dados em formato inválido");
-        }
+        console.log(err);
+        alert("Confira os dados");
       }
       commit("setLoading", false);
     },
@@ -52,12 +56,10 @@ export default createStore({
       commit("setLoading", true);
       try {
         await knightService.updateKnight(payload.id, payload.body);
-        dispatch('init')
+        dispatch("init");
       } catch (err: any) {
-        if (err.code == 422) {
-          console.log(err);
-          alert("Dados em formato inválido");
-        }
+        console.log(err);
+        alert("Confira os dados");
       }
       commit("setLoading", false);
     },
@@ -65,7 +67,7 @@ export default createStore({
       commit("setLoading", true);
       try {
         await knightService.deleteKnight(id);
-        dispatch('init')
+        dispatch("init");
       } catch (err) {
         console.log(err);
         alert("Infelizmente nao conseguimos completar a deleção");
@@ -77,8 +79,8 @@ export default createStore({
       try {
         knight = await knightService.getKnight(id);
       } catch (err: any) {
-          console.log(err);
-          alert("Não achamos esse documento");
+        console.log(err);
+        alert("Não achamos esse documento");
       }
       return knight;
     },

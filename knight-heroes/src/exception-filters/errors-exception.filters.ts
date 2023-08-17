@@ -6,11 +6,19 @@ export class ErrorsExceptionFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
-    console.log('oloco', exception.message);
+    console.log(exception);
     if (exception.name == 'CastError') {
       return response.status(422).json({
         statusCode: 422,
         message: exception.message,
+      });
+    }
+
+    if (exception.status == 422) {
+      return response.status(422).json({
+        statusCode: 422,
+        message: exception.message,
+        validations: exception.response.message,
       });
     }
 

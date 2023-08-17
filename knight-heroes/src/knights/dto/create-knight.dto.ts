@@ -3,8 +3,8 @@ import {
   IsDateString,
   IsNotEmpty,
   IsNumber,
+  IsNumberString,
   IsString,
-  Min,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -13,8 +13,8 @@ class Weapon {
   @IsString()
   @IsNotEmpty()
   name: string;
-  @IsNumber()
-  @Min(0)
+  @IsNumberString()
+  @IsNotEmpty()
   mod: number;
   @IsString()
   @IsNotEmpty()
@@ -24,23 +24,23 @@ class Weapon {
 }
 
 class Attributes {
-  @IsNumber()
-  @Min(0)
+  @IsNumberString()
+  @IsNotEmpty()
   strength: number;
-  @IsNumber()
-  @Min(0)
+  @IsNumberString()
+  @IsNotEmpty()
   dexterity: number;
   @IsNumber()
-  @Min(0)
+  @IsNotEmpty()
   constitution: number;
-  @IsNumber()
-  @Min(0)
+  @IsNumberString()
+  @IsNotEmpty()
   intelligence: number;
-  @IsNumber()
-  @Min(0)
+  @IsNumberString()
+  @IsNotEmpty()
   wisdom: number;
-  @Min(0)
-  @IsNumber()
+  @IsNotEmpty()
+  @IsNumberString()
   charisma: number;
 }
 
