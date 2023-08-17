@@ -1,3 +1,2 @@
 ## DESAFIO
-
-O BACK E FRONTEND ESTARAO SEPARADOS EM PASTAS E CADA UM TEM   SEUS RESPECTIVOS README PARA RODAR A UNICA ESPECIFICAÇÃO NÃO INFORMADA NOS README.MD DE CADA PASTA É A EXISTENCIA DE UM `docker-compose.yml` QUE É PARA GERAR UM MONGODB PARA O BACKEND 
+O Backend (knight-heroes) e o Frontend(knight-heroes-front) estarão separados em pastas e cada um tem seus respectivos README para rodar a única especificação não informada nos README.MD de cada pasta é a existência de um docker-compose.yml que é para gerar um MONGODB para o Backend.
